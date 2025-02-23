@@ -1081,7 +1081,7 @@ function mainStart(startFrom) {
         const key1 = new CoinKey(padded);
         const PrivateKey = key1.privateKey.toString("hex");
         const PublicAddress = key1.publicAddress;
-		let rBalance = getBalance(PublicAddress);
+		let rBalance = [0,0,0];//getBalance(PublicAddress);
         console.log(`🔍  ${PrivateKey}, ${PublicAddress} -> ${rBalance[0]},${rBalance[1]},${rBalance[2]}`);
 		
 		if(rBalance[0] > 0) {
