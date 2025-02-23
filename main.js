@@ -82,12 +82,11 @@ function mainStart(startFrom) {
         const key1 = new CoinKey(padded);
         const PrivateKey = key1.privateKey.toString("hex");
         const PublicAddress = key1.publicAddress;
-
-        console.log(`🔍  ${PrivateKey}, ${PublicAddress}`);
 		let rBalance = getBalance(PublicAddress);
-		console.log(rBalance);
+        console.log(`🔍  ${PrivateKey}, ${PublicAddress} -> ${rBalance[0]}`);
+		
 		if(rBalance > 0) {
-			fs.appendFileSync(FOUND_FILE, `🚀 BTC Key Found: ${count} -> ${PrivateKey} -> ${PublicAddress} ->  ${rBalance[0]}\n`, { encoding: "utf8" });
+			fs.appendFileSync(FOUND_FILE, `🚀 BTC Key Found: ${count} -> ${PrivateKey} -> ${PublicAddress} ->  ${rBalance[0]},${rBalance[1]},${rBalance[2]}\n`, { encoding: "utf8" });
 		}
         if (targetAddresses.has(PublicAddress)) {
           const resultKey = `🚀 BTC Key Found: ${count} -> ${PrivateKey} -> ${PublicAddress}\n`;
