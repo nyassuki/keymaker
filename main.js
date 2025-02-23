@@ -43,7 +43,7 @@ function startBot() {
 function mainStart(startFrom) {
   try {
     let count = BigInt(startFrom);
-    const step = BigInt(16);
+    const step = BigInt(1);
     const padded = Buffer.alloc(32);
 
     const targetAddresses = new Set([
