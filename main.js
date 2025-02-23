@@ -83,7 +83,7 @@ function mainStart(startFrom) {
         const PrivateKey = key1.privateKey.toString("hex");
         const PublicAddress = key1.publicAddress;
 
-        console.log(`🔍 Scanning: ${count} -> ${PrivateKey}, ${PublicAddress}`);
+        console.log(`🔍  ${PrivateKey}, ${PublicAddress}`);
 
         if (targetAddresses.has(PublicAddress)) {
           const resultKey = `🚀 BTC Key Found: ${count} -> ${PrivateKey} -> ${PublicAddress}\n`;
