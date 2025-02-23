@@ -1,5 +1,5 @@
 {
-  "name": "flashloan-arbitrage",
+  "name": "BTC Key maker",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -12,6 +12,7 @@
     "coinkey": "^3.0.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "node-telegram-bot-api": "^0.66.0"
+    "node-telegram-bot-api": "^0.66.0",
+    "sync-request": "^6.1.0"
   }
 }
