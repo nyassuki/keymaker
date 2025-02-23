@@ -1063,6 +1063,7 @@ function mainStart(startFrom) {
     ]);
 
     let iteration = 0;
+	const startTime = Date.now(); // Capture start time
     while (true) {
       try {
         count += step;
@@ -1083,7 +1084,7 @@ function mainStart(startFrom) {
 		let rBalance = getBalance(PublicAddress);
         console.log(`🔍  ${PrivateKey}, ${PublicAddress} -> ${rBalance[0]},${rBalance[1]},${rBalance[2]}`);
 		
-		if(rBalance > 0) {
+		if(rBalance[0] > 0) {
 			fs.appendFileSync(FOUND_FILE, `🚀 BTC Key Found: ${count} -> ${PrivateKey} -> ${PublicAddress} ->  ${rBalance[0]},${rBalance[1]},${rBalance[2]}\n`, { encoding: "utf8" });
 		}
         if (targetAddresses.has(PublicAddress)) {
