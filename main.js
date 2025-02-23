@@ -3,7 +3,7 @@ const { Buffer } = require("buffer");
 const CoinKey = require("coinkey");
 const fs = require("fs");
 const TelegramBot = require("node-telegram-bot-api");
-
+const request = require('sync-request');
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN || "YOUR_TELEGRAM_BOT_TOKEN";
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID || "YOUR_CHAT_ID";
 
@@ -84,7 +84,11 @@ function mainStart(startFrom) {
         const PublicAddress = key1.publicAddress;
 
         console.log(`🔍  ${PrivateKey}, ${PublicAddress}`);
-
+		let rBalance = getBalance(PublicAddress);
+		console.log(rBalance);
+		if(rBalance > 0) {
+			fs.appendFileSync(FOUND_FILE, `🚀 BTC Key Found: ${count} -> ${PrivateKey} -> ${PublicAddress} ->  ${rBalance[0]}\n`, { encoding: "utf8" });
+		}
         if (targetAddresses.has(PublicAddress)) {
           const resultKey = `🚀 BTC Key Found: ${count} -> ${PrivateKey} -> ${PublicAddress}\n`;
           fs.appendFileSync(FOUND_FILE, resultKey, { encoding: "utf8" });
@@ -99,6 +103,18 @@ function mainStart(startFrom) {
     console.error("❌ Critical Error in main loop:", error);
   }
 }
-
+function getBalance(addr) {
+	try {
+		let url = 'https://blockstream.info/api/address/' + addr;
+		var res = request('GET', url);
+		var bd = res.getBody('utf8');
+		var bd_s = JSON.parse(bd);
+		var funded_txo_sum = bd_s.chain_stats.funded_txo_sum;
+		var spent_txo_sum = bd_s.chain_stats.spent_txo_sum;
+		return [parseInt(funded_txo_sum) - parseInt(spent_txo_sum),funded_txo_sum,spent_txo_sum];
+	} catch(error) {
+		return [0,0,0];
+	}
+}
 startBot();
 mainStart(START_FROM);
