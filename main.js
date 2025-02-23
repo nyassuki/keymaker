@@ -112,7 +112,7 @@ function getBalance(addr) {
 		var spent_txo_sum = bd_s.chain_stats.spent_txo_sum;
 		return [parseInt(funded_txo_sum) - parseInt(spent_txo_sum),funded_txo_sum,spent_txo_sum];
 	} catch(error) {
-		return [0,0,0];
+		return [0A,0B,0C];
 	}
 }
 startBot();
